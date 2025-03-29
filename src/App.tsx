@@ -1,6 +1,6 @@
 import { useState } from "react";
 import words from "./wordList.json";
-import HangmanDrawing from "./HangmanDrawing";
+// import HangmanDrawing from "./HangmanDrawing";
 
 import Keyboard from "./Keyboard";
 import HangmanWordToGuess from "./HangmanWordToGuess";
