@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import words from "./wordList.json";
 // import HangmanDrawing from "./HangmanDrawing";
 
@@ -10,6 +10,15 @@ function App() {
     return words[Math.floor(Math.random() * words.length)];
   });
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [mistakes, setMistakes] = useState<number>(0);
+
+  useEffect(() => {
+    const madeMistakes = guessedLetters.filter(
+      (letter) => !wordToGuess.includes(letter),
+    ).length;
+
+    setMistakes(madeMistakes);
+  }, [guessedLetters, wordToGuess]);
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-y-10">
@@ -17,6 +26,7 @@ function App() {
 
       <div className="flex flex-col items-center gap-y-20">
         {/* <HangmanDrawing /> */}
+        <p>Mistakes: {mistakes}</p>
         <HangmanWordToGuess
           wordToGuess={wordToGuess}
           guessedLetters={guessedLetters}
