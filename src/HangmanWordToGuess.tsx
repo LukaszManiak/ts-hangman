@@ -8,7 +8,7 @@ export default function HangmanWordToGuess({
   wordToGuess,
 }: WordToGuessProps) {
   return (
-    <div className="flex gap-x-6">
+    <div className="flex gap-x-6 text-4xl">
       {wordToGuess
         .split("")
         .map((letter) =>

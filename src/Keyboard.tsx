@@ -3,19 +3,13 @@ const keyboardLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 type KeyboardProps = {
   guessedLetters: string[];
   setGuessedLetters: React.Dispatch<React.SetStateAction<string[]>>;
+  addGuessedLetter: (letter: string) => void;
 };
 
 export default function Keyboard({
   guessedLetters,
-  setGuessedLetters,
+  addGuessedLetter,
 }: KeyboardProps) {
-  function handleLetterClick(letter: string) {
-    if (!guessedLetters.includes(letter)) {
-      console.log(guessedLetters);
-      setGuessedLetters((prevLetters) => [...prevLetters, letter]);
-    }
-  }
-
   return (
     <div className="flex w-1/2 flex-wrap items-center justify-center gap-4">
       {keyboardLetters.map((letter: string) => (
@@ -28,7 +22,7 @@ export default function Keyboard({
               : "bg-none"
           }`}
           id={letter}
-          onClick={() => handleLetterClick(letter)}
+          onClick={() => addGuessedLetter(letter)}
         >
           {letter}
         </button>
