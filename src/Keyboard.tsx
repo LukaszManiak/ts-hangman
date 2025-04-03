@@ -16,10 +16,10 @@ export default function Keyboard({
         <button
           key={letter}
           disabled={guessedLetters.includes(letter)}
-          className={`rounded border px-4 py-2 hover:cursor-pointer ${
+          className={`rounded border px-4 py-2 transition-all duration-200 ease-in-out ${
             guessedLetters.includes(letter)
-              ? "bg-blue-500 text-white"
-              : "bg-none"
+              ? "bg-blue-300 text-white hover:bg-blue-300"
+              : "bg-none hover:cursor-pointer hover:bg-blue-500"
           }`}
           id={letter}
           onClick={() => addGuessedLetter(letter)}
