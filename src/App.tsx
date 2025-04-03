@@ -92,6 +92,13 @@ function App() {
         <LevelModalWindow setDifficulty={setDifficulty} />
       )}
 
+      <button
+        onClick={() => setScore(0)}
+        className="absolute top-0 right-0 mt-4 mr-4 cursor-pointer rounded-2xl bg-red-400 p-3 font-semibold text-red-50 transition-all duration-200 ease-in-out hover:bg-red-500"
+      >
+        RESTART SCORE
+      </button>
+
       {difficulty && !isFinished && (
         <div className="flex flex-col items-center gap-y-20">
           {/* <HangmanDrawing /> */}
