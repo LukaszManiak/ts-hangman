@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
-import words from "./wordList.json";
 // import HangmanDrawing from "./HangmanDrawing";
 
+import { useEffect, useState } from "react";
+import words from "./wordList.json";
 import Keyboard from "./Keyboard";
 import HangmanWordToGuess from "./HangmanWordToGuess";
-import ModalWindow from "./ModalWindow";
+import FinishedModalWindow from "./FinishedModalWindow";
+import LevelModalWindow from "./LevelModalWindow";
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState(() => {
-    return words[Math.floor(Math.random() * words.length)];
-  });
+  const [wordToGuess, setWordToGuess] = useState<string>("");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [mistakes, setMistakes] = useState<number>(0);
   const [isFinished, setIsFinished] = useState(false);
   const [result, setResult] = useState<"win" | "lose" | null>(null);
   const [score, setScore] = useState(0);
+  const [difficulty, setDifficulty] = useState<"easy" | "hard" | null>(null);
 
+  // creating score
   useEffect(() => {
     localStorage.setItem("SCORE", JSON.stringify(score));
   }, [score]);
 
+  // handle certain key selection
   const addGuessedLetter = (letter: string) => {
     setGuessedLetters((prevGuessed) => [...prevGuessed, letter.toUpperCase()]);
 
@@ -28,15 +30,29 @@ function App() {
     }
   };
 
+  // game restart
   function handleRestartGame() {
     setIsFinished(false);
     setResult(null);
     setMistakes(0);
     setGuessedLetters([]);
-    setWordToGuess(() => words[Math.floor(Math.random() * words.length)]);
+    setWordToGuess("");
+    setDifficulty(null);
   }
 
+  // checking difficulty with every run
   useEffect(() => {
+    if (difficulty) {
+      const wordsList =
+        difficulty === "easy" ? words.easyWords : words.hardWords;
+      setWordToGuess(wordsList[Math.floor(Math.random() * wordsList.length)]);
+    }
+  }, [difficulty]);
+
+  //game result
+  useEffect(() => {
+    if (!wordToGuess) return;
+
     // lose
     if (mistakes >= 6) {
       setIsFinished(true);
@@ -60,16 +76,23 @@ function App() {
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-y-10">
       <div className="flex items-center gap-x-4">
         <h1 className="text-9xl font-bold">HANGMAN</h1>
-
         <p className="rounded-2xl bg-blue-600 px-4 py-2 text-3xl text-blue-50">
           SCORE {score}
         </p>
       </div>
+
       {isFinished && (
-        <ModalWindow result={result} handleRestartGame={handleRestartGame} />
+        <FinishedModalWindow
+          result={result}
+          handleRestartGame={handleRestartGame}
+        />
       )}
 
-      {!isFinished && (
+      {!isFinished && !difficulty && (
+        <LevelModalWindow setDifficulty={setDifficulty} />
+      )}
+
+      {difficulty && !isFinished && (
         <div className="flex flex-col items-center gap-y-20">
           {/* <HangmanDrawing /> */}
           <p className="text-2xl font-medium">MISTAKES {mistakes}</p>

@@ -1,4 +1,4 @@
-type ModalWindowProps = {
+type FinishedModalWindowProps = {
   result: "win" | "lose" | null;
   handleRestartGame: () => void;
 };
@@ -6,7 +6,7 @@ type ModalWindowProps = {
 export default function ModalWindow({
   result,
   handleRestartGame,
-}: ModalWindowProps) {
+}: FinishedModalWindowProps) {
   return (
     <div className="flex w-1/3 flex-col items-center justify-center gap-y-4 rounded-3xl border-2 border-blue-600 bg-white p-8">
       <h1 className="text-4xl font-bold tracking-widest">
