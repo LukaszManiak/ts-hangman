@@ -68,14 +68,18 @@ function App() {
     ) {
       setIsFinished(true);
       setResult("win");
-      setScore((s) => s + 1);
+      setScore((s) => {
+        if (difficulty === "easy") return s + 1;
+        if (difficulty === "hard") return s + 3;
+        return s;
+      });
     }
-  }, [mistakes, guessedLetters, wordToGuess]);
+  }, [mistakes, guessedLetters, wordToGuess, difficulty]);
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-y-10">
-      <div className="flex items-center gap-x-4">
-        <h1 className="text-9xl font-bold">HANGMAN</h1>
+      <div className="flex flex-col items-center gap-x-4 gap-y-4 xl:flex-row">
+        <h1 className="text-6xl font-bold xl:text-9xl">HANGMAN</h1>
         <p className="rounded-2xl bg-blue-600 px-4 py-2 text-3xl text-blue-50">
           SCORE {score}
         </p>

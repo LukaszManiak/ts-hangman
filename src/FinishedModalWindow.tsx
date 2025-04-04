@@ -8,7 +8,7 @@ export default function ModalWindow({
   handleRestartGame,
 }: FinishedModalWindowProps) {
   return (
-    <div className="flex w-1/3 flex-col items-center justify-center gap-y-4 rounded-3xl border-2 border-blue-600 bg-white p-8">
+    <div className="flex w-3/4 flex-col items-center justify-center gap-y-4 rounded-3xl border-2 border-blue-600 bg-white p-8 xl:w-1/3">
       <h1 className="text-4xl font-bold tracking-widest">
         {result?.toUpperCase()}
       </h1>
