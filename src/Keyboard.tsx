@@ -11,7 +11,7 @@ export default function Keyboard({
   addGuessedLetter,
 }: KeyboardProps) {
   return (
-    <div className="flex w-4/5 flex-wrap items-center justify-center gap-4 xl:w-1/2">
+    <div className="flex w-4/5 flex-wrap items-center justify-center gap-4 xl:w-full">
       {keyboardLetters.map((letter: string) => (
         <button
           key={letter}

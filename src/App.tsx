@@ -104,7 +104,7 @@ function App() {
       </button>
 
       {difficulty && !isFinished && (
-        <div className="flex flex-col items-center gap-y-20">
+        <div className="flex w-4/5 flex-col items-center gap-y-20 rounded-3xl border-2 border-blue-600 p-12 xl:w-1/2">
           {/* <HangmanDrawing /> */}
           <p className="text-2xl font-medium">MISTAKES {mistakes}</p>
           <HangmanWordToGuess
