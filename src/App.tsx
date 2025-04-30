@@ -7,6 +7,8 @@ import HangmanWordToGuess from "./HangmanWordToGuess";
 import FinishedModalWindow from "./FinishedModalWindow";
 import LevelModalWindow from "./LevelModalWindow";
 
+import { useGame } from "./gameContext";
+
 function App() {
   const [wordToGuess, setWordToGuess] = useState<string>("");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
@@ -15,6 +17,8 @@ function App() {
   const [result, setResult] = useState<"win" | "lose" | null>(null);
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState<"easy" | "hard" | null>(null);
+
+  const { state, dispatch } = useGame();
 
   // creating score
   useEffect(() => {
